@@ -1,4 +1,5 @@
 import { ArrowRight, FileText, AlertTriangle, CheckCircle, TrendingUp } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function Dashboard() {
   return (
@@ -9,9 +10,9 @@ export default function Dashboard() {
           <p className="mt-1 text-sm text-slate-500">Here's a digest of your recent corporate lending pipeline.</p>
         </div>
         <div className="mt-4 md:mt-0 flex">
-          <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <Link to="/assessment" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
             Start New Assessment
-          </button>
+          </Link>
         </div>
       </div>
 
