@@ -3,10 +3,7 @@ from typing import Optional
 from datetime import datetime
 from enum import Enum
 
-
-# ──────────────────────────────────────────────
 # Enums (fixed choices — like dropdowns)
-# ──────────────────────────────────────────────
 
 class ApplicationStatus(str, Enum):
     PENDING = "pending"
@@ -59,10 +56,7 @@ class Decision(str, Enum):
     APPROVE_WITH_CONDITIONS = "APPROVE_WITH_CONDITIONS"
     REJECT = "REJECT"
 
-
-# ──────────────────────────────────────────────
 # Model 1: Company Application
-# ──────────────────────────────────────────────
 
 class CompanyApplicationCreate(BaseModel):
     company_name: str = Field(..., example="Zenith Metals Ltd")
@@ -83,10 +77,7 @@ class CompanyApplication(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
 
-
-# ──────────────────────────────────────────────
 # Model 2: Extracted Financials + Ingested Document
-# ──────────────────────────────────────────────
 
 class ExtractedFinancials(BaseModel):
     revenue: Optional[float] = Field(None, description="Annual revenue in INR")
@@ -120,9 +111,7 @@ class IngestedDocument(BaseModel):
     processed_at: datetime = Field(default_factory=datetime.now)
 
 
-# ──────────────────────────────────────────────
 # Model 3: Risk Alert (from Research Agent)
-# ──────────────────────────────────────────────
 
 class RiskAlert(BaseModel):
     severity: RiskSeverity
@@ -142,10 +131,7 @@ class ResearchResult(BaseModel):
     promoter_background: str = Field("", description="LLM summary of promoter history")
     researched_at: datetime = Field(default_factory=datetime.now)
 
-
-# ──────────────────────────────────────────────
 # Model 4: Primary Insight (Credit Officer's input)
-# ──────────────────────────────────────────────
 
 class PrimaryInsightCreate(BaseModel):
     application_id: str
@@ -162,10 +148,7 @@ class PrimaryInsight(BaseModel):
     impact: InsightImpact
     created_at: datetime = Field(default_factory=datetime.now)
 
-
-# ──────────────────────────────────────────────
 # Model 5: Credit Score (Five Cs Breakdown)
-# ──────────────────────────────────────────────
 
 class FiveCsScore(BaseModel):
     character: int = Field(..., ge=0, le=100, description="Promoter integrity & track record")
@@ -183,10 +166,7 @@ class FiveCsNarrative(BaseModel):
     collateral: str = Field(..., description="Narrative on security/assets")
     conditions: str = Field(..., description="Narrative on industry outlook")
 
-
-# ──────────────────────────────────────────────
 # Model 6: Credit Decision
-# ──────────────────────────────────────────────
 
 class CreditDecision(BaseModel):
     decision: Decision
@@ -196,10 +176,7 @@ class CreditDecision(BaseModel):
     key_risk_factors: list[str] = Field(default_factory=list)
     key_strengths: list[str] = Field(default_factory=list)
 
-
-# ──────────────────────────────────────────────
 # Model 7: CAM Report (the final output)
-# ──────────────────────────────────────────────
 
 class CAMReport(BaseModel):
     id: str
@@ -216,9 +193,7 @@ class CAMReport(BaseModel):
     generated_at: datetime = Field(default_factory=datetime.now)
 
 
-# ──────────────────────────────────────────────
 # API Request Models
-# ──────────────────────────────────────────────
 
 class DocumentUploadRequest(BaseModel):
     application_id: str = Field(..., example="APP-001")
@@ -235,9 +210,7 @@ class CAMExportRequest(BaseModel):
     format: ExportFormat = ExportFormat.DOCX
 
 
-# ──────────────────────────────────────────────
 # API Response Wrappers
-# ──────────────────────────────────────────────
 
 class APIResponse(BaseModel):
     success: bool
